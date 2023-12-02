@@ -36,46 +36,47 @@ public class ObjectMover : MonoBehaviour
         }
     }
 
-void MoveObjectAlongLine()
-{
-    if (lineDrawer != null && lineDrawer.LineRenderer != null)
+    void MoveObjectAlongLine()
     {
-        LineRenderer lineRenderer = lineDrawer.LineRenderer;
-
-        // Move the object along the line based on a constant speed
-        distanceAlongLine += Time.deltaTime * speed;
-
-        // Wrap around the line if the distance exceeds the length of the line
-        if (distanceAlongLine > lineRenderer.positionCount - 1)
+        if (lineDrawer != null && lineDrawer.LineRenderer != null)
         {
-            distanceAlongLine = 0;
-        }
+            LineRenderer lineRenderer = lineDrawer.LineRenderer;
 
-        // Interpolate along the line and set the object's position
-        int floorIndex = Mathf.FloorToInt(distanceAlongLine);
-        int ceilIndex = Mathf.CeilToInt(distanceAlongLine);
+            // Move the object along the line based on a constant speed
+            distanceAlongLine += Time.deltaTime * speed;
 
-        // Ensure indices are within bounds
-        floorIndex = Mathf.Clamp(floorIndex, 0, lineRenderer.positionCount - 1);
-        ceilIndex = Mathf.Clamp(ceilIndex, 0, lineRenderer.positionCount - 1);
+            // Wrap around the line if the distance exceeds the length of the line
+            if (distanceAlongLine > lineRenderer.positionCount - 1)
+            {
+                distanceAlongLine = 0;
+            }
 
-        Vector3 floorPosition = lineRenderer.GetPosition(floorIndex);
-        Vector3 ceilPosition = lineRenderer.GetPosition(ceilIndex);
+            // Interpolate along the line and set the object's position
+            int floorIndex = Mathf.FloorToInt(distanceAlongLine);
+            int ceilIndex = Mathf.CeilToInt(distanceAlongLine);
 
-        // Easing function for smoother rotation (you can experiment with different easing functions)
-        float t = EaseInOutCubic(distanceAlongLine - floorIndex);
+            // Ensure indices are within bounds
+            floorIndex = Mathf.Clamp(floorIndex, 0, lineRenderer.positionCount - 1);
+            ceilIndex = Mathf.Clamp(ceilIndex, 0, lineRenderer.positionCount - 1);
 
-        // Interpolate for smooth position along the line
-        Vector3 newPosition = Vector3.Lerp(floorPosition, ceilPosition, t);
-        newPosition.y = heightAbovePlane; // Adjust the y-coordinate to keep the object above the plane
-        transform.position = newPosition;
+            Vector3 floorPosition = lineRenderer.GetPosition(floorIndex);
+            Vector3 ceilPosition = lineRenderer.GetPosition(ceilIndex);
 
-        // Rotate the object smoothly toward the target direction
-        Vector3 targetDirection = ceilPosition - floorPosition;
-        if (targetDirection != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection.normalized, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f); // Adjust the speed as needed
+            // Easing function for smoother rotation (you can experiment with different easing functions)
+            float t = EaseInOutCubic(distanceAlongLine - floorIndex);
+
+            // Interpolate for smooth position along the line
+            Vector3 newPosition = Vector3.Lerp(floorPosition, ceilPosition, t);
+            newPosition.y = heightAbovePlane; // Adjust the y-coordinate to keep the object above the plane
+            transform.position = newPosition;
+
+            // Rotate the object smoothly toward the target direction
+            Vector3 targetDirection = ceilPosition - floorPosition;
+            if (targetDirection != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection.normalized, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f); // Adjust the speed as needed
+            }
         }
     }
 }
