@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineDrawer: {fileID: 1376296066}
-  speed: 5
+  speed: 2
   heightAbovePlane: 2.3
 --- !u!1 &1235964348
 GameObject:
@@ -667,8 +667,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1376296064}
-  - component: {fileID: 1376296065}
   - component: {fileID: 1376296066}
+  - component: {fileID: 1376296067}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -691,7 +691,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!120 &1376296065
+--- !u!114 &1376296066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376296062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb4a9c582db64b4abd6548872159ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineRenderer: {fileID: 1376296067}
+  startObject: {fileID: 1112398413}
+  finishObject: {fileID: 1993828213}
+--- !u!120 &1376296067
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -732,19 +747,19 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1.0399742
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.2
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -756,8 +771,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 0, b: 0, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -781,11 +796,11 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: 0
+      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 90
-    numCapVertices: 90
+    numCapVertices: 0
     alignment: 0
     textureMode: 0
     textureScale: {x: 1, y: 1}
@@ -795,21 +810,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &1376296066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1376296062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb4a9c582db64b4abd6548872159ffb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lineRenderer: {fileID: 1376296065}
-  startObject: {fileID: 1112398413}
-  finishObject: {fileID: 1993828213}
 --- !u!1 &1993828213
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,7 +922,7 @@ SceneRoots:
   - {fileID: 1235964351}
   - {fileID: 883212907}
   - {fileID: 1112398412}
-  - {fileID: 639835947}
   - {fileID: 1376296064}
+  - {fileID: 639835947}
   - {fileID: 53410562}
   - {fileID: 1993828217}
