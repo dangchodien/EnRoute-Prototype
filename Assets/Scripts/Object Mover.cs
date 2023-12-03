@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectMover : MonoBehaviour
 {
-    public ContinuousLineDrawer lineDrawer; // Reference to the script that draws the line
+    public DynamicLineDrawer lineDrawer; // Reference to the script that draws the line
     public float speed = 5f; // Speed of movement
     public float heightAbovePlane = 1f; // Adjust this value to set the height above the plane
 
@@ -26,9 +26,9 @@ public class ObjectMover : MonoBehaviour
     void CheckLineDrawn()
     {
         // Check if the line has been drawn completely
-        if (lineDrawer != null && lineDrawer.LineRenderer != null)
+        if (lineDrawer != null && lineDrawer.lineRenderer != null)
         {
-            LineRenderer lineRenderer = lineDrawer.LineRenderer;
+            LineRenderer lineRenderer = lineDrawer.lineRenderer;
             if (distanceAlongLine >= lineRenderer.positionCount - 1)
             {
                 lineDrawn = true;
@@ -38,11 +38,27 @@ public class ObjectMover : MonoBehaviour
 
     void MoveObjectAlongLine()
     {
+<<<<<<< Updated upstream
         if (lineDrawer != null && lineDrawer.LineRenderer != null)
         {
             LineRenderer lineRenderer = lineDrawer.LineRenderer;
 
             // Move the object along the line based on a constant speed
+=======
+<<<<<<< HEAD
+        if (lineDrawer != null && lineDrawer.lineRenderer != null)
+        {
+            LineRenderer lineRenderer = lineDrawer.lineRenderer;
+
+            // Move the object along the line based on the speed
+=======
+        if (lineDrawer != null && lineDrawer.LineRenderer != null)
+        {
+            LineRenderer lineRenderer = lineDrawer.LineRenderer;
+
+            // Move the object along the line based on a constant speed
+>>>>>>> 767c1aacae397383476bf1af9a0c24b889eab514
+>>>>>>> Stashed changes
             distanceAlongLine += Time.deltaTime * speed;
 
             // Wrap around the line if the distance exceeds the length of the line
@@ -62,6 +78,23 @@ public class ObjectMover : MonoBehaviour
             Vector3 floorPosition = lineRenderer.GetPosition(floorIndex);
             Vector3 ceilPosition = lineRenderer.GetPosition(ceilIndex);
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+            // Interpolate between the two adjacent points
+            float t = distanceAlongLine - floorIndex;
+            Vector3 newPosition = Vector3.Lerp(floorPosition, ceilPosition, t);
+
+            // Adjust the y-coordinate to keep the object above the plane
+            newPosition.y = heightAbovePlane;
+
+            transform.position = newPosition;
+
+            // Optionally, rotate the object to align with the line direction
+            Vector3 direction = ceilPosition - floorPosition;
+            transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+=======
+>>>>>>> Stashed changes
             // Easing function for smoother rotation (you can experiment with different easing functions)
             float t = EaseInOutCubic(distanceAlongLine - floorIndex);
 
@@ -77,9 +110,19 @@ public class ObjectMover : MonoBehaviour
                 Quaternion targetRotation = Quaternion.LookRotation(targetDirection.normalized, Vector3.up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f); // Adjust the speed as needed
             }
+<<<<<<< Updated upstream
+=======
+>>>>>>> 767c1aacae397383476bf1af9a0c24b889eab514
+>>>>>>> Stashed changes
         }
     }
 }
+
+
+
+
+
+
 
 
 
