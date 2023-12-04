@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ChangeScene : MonoBehaviour
+public class SceneChanger : MonoBehaviour
 {
-
-    void LoadNextScene()
+    // Method to change the scene. The sceneName parameter is the name of the scene you want to load.
+    public void ChangeScene(string Menu)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(Menu);
     }
 }
