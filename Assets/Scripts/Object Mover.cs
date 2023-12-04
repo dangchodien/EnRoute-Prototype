@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectMover : MonoBehaviour
 {
-    public ContinuousLineDrawer lineDrawer; // Reference to the script that draws the line
+    public DynamicLineDrawer lineDrawer; // Reference to the script that draws the line
     public float speed = 5f; // Speed of movement
     public float heightAbovePlane = 1f; // Adjust this value to set the height above the plane
 
@@ -26,29 +26,32 @@ public class ObjectMover : MonoBehaviour
     void CheckLineDrawn()
     {
         // Check if the line has been drawn completely
-        if (lineDrawer != null && lineDrawer.LineRenderer != null)
+        if (lineDrawer != null && lineDrawer.lineRenderer != null)
         {
-            LineRenderer lineRenderer = lineDrawer.LineRenderer;
+            LineRenderer lineRenderer = lineDrawer.lineRenderer;
+
+            // Check if the object has reached the end of the line
             if (distanceAlongLine >= lineRenderer.positionCount - 1)
             {
                 lineDrawn = true;
+                // Optionally, you can perform additional actions when the object reaches the end of the line
             }
         }
     }
 
     void MoveObjectAlongLine()
     {
-        if (lineDrawer != null && lineDrawer.LineRenderer != null)
+        if (lineDrawer != null && lineDrawer.lineRenderer != null)
         {
-            LineRenderer lineRenderer = lineDrawer.LineRenderer;
+            LineRenderer lineRenderer = lineDrawer.lineRenderer;
 
             // Move the object along the line based on the speed
             distanceAlongLine += Time.deltaTime * speed;
 
-            // Wrap around the line if the distance exceeds the length of the line
+            // If the object has reached the end of the line, stop moving
             if (distanceAlongLine > lineRenderer.positionCount - 1)
             {
-                distanceAlongLine = 0;
+                distanceAlongLine = lineRenderer.positionCount - 1;
             }
 
             // Interpolate along the line and set the object's position
@@ -77,6 +80,14 @@ public class ObjectMover : MonoBehaviour
         }
     }
 }
+
+
+
+
+
+
+
+
 
 
 
